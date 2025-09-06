@@ -57,6 +57,15 @@ body {
     transform: scale(1.05);
 }
 
+.grid-item.hinted {
+    animation: flash 0.5s 3; /* Flash 3 times */
+}
+
+@keyframes flash {
+    0%, 100% { background-color: #4a5568; }
+    50% { background-color: #63b3ed; } /* Light blue flash */
+}
+
 .solved-row {
     border-radius: 8px;
     padding: 12px;

@@ -21,6 +21,8 @@ class AnimeConnectionsGame {
         this.solvedContainer = null;
         this.messageBox = null;
         this.newGameButton = null;
+        this.retryButton = null;
+        this.hintButton = null;
         
         this.init();
     }
@@ -44,6 +46,8 @@ class AnimeConnectionsGame {
         this.solvedContainer = document.getElementById('solved-container');
         this.messageBox = document.getElementById('message-box');
         this.newGameButton = document.getElementById('new-game-button');
+        this.retryButton = document.getElementById('retry-button');
+        this.hintButton = document.getElementById('hint-button');
 
         // Load game data
         await this.loadGameData();
@@ -76,6 +80,8 @@ class AnimeConnectionsGame {
         this.deselectButton.addEventListener('click', () => this.deselectAll());
         this.shuffleButton.addEventListener('click', () => this.shuffleGrid());
         this.newGameButton.addEventListener('click', () => this.setupGame());
+        this.retryButton.addEventListener('click', () => this.retryGame());
+        this.hintButton.addEventListener('click', () => this.giveHint());
 
         // Add keyboard support for accessibility
         document.addEventListener('keydown', (e) => this.handleKeyboard(e));
@@ -110,7 +116,7 @@ class AnimeConnectionsGame {
         }
     }
 
-    setupGame() {
+    setupGame(isRetry = false) {
         // Reset game state
         this.selectedItems = [];
         this.mistakes = 0;
@@ -123,14 +129,18 @@ class AnimeConnectionsGame {
         this.submitButton.disabled = false;
         this.shuffleButton.disabled = false; // Re-enable shuffle button
         this.deselectButton.disabled = false; // Re-enable deselect button
+        this.retryButton.style.display = 'none'; // Hide retry button
+        this.hintButton.disabled = false; // Re-enable hint button
         
-        // Shuffle all data and pick 4 categories
-        const shuffledData = [...this.allData].sort(() => 0.5 - Math.random());
-        this.gameCategories = shuffledData.slice(0, 4);
-
-        // Get all answers from the chosen categories and shuffle them
-        this.currentAnswers = this.gameCategories.flatMap(cat => cat.answers);
-        this.currentAnswers.sort(() => 0.5 - Math.random());
+        if (!isRetry) {
+            // Shuffle all data and pick 4 categories
+            const shuffledData = [...this.allData].sort(() => 0.5 - Math.random());
+            this.gameCategories = shuffledData.slice(0, 4);
+    
+            // Get all answers from the chosen categories and shuffle them
+            this.currentAnswers = this.gameCategories.flatMap(cat => cat.answers);
+            this.currentAnswers.sort(() => 0.5 - Math.random());
+        }
 
         // Create grid items
         this.currentAnswers.forEach((answer, index) => {
@@ -284,6 +294,30 @@ class AnimeConnectionsGame {
         }
     }
 
+    giveHint() {
+        if (this.gameEnded) return;
+
+        // Get the first item from each of the four categories for the hint
+        const hintAnswers = this.gameCategories.map(category => category.answers[1]);
+
+        // Highlight the hinted items on the grid
+        this.gridContainer.childNodes.forEach(item => {
+            if (hintAnswers.includes(item.dataset.answer)) {
+                // Add a temporary class for a flashing effect
+                item.classList.add('hinted');
+                setTimeout(() => {
+                    item.classList.remove('hinted');
+                }, 1500); // Remove class after 1.5 seconds
+            }
+        });
+
+        this.showMessage(`These items each belong to a different group.`, 'alert-info');
+    }
+
+    retryGame() {
+        this.setupGame(true); // true indicates a retry
+    }
+
     handleIncorrectGuess() {
         this.mistakes++;
         this.updateMistakeDots();
@@ -361,19 +395,17 @@ class AnimeConnectionsGame {
 
     endGame(isWin) {
         this.gameEnded = true; // Set game ended flag
+        // Disable buttons
         this.submitButton.disabled = true;
-        this.shuffleButton.disabled = true; // Disable shuffle button
-        this.deselectButton.disabled = true; // Disable deselect button
-        
+        this.shuffleButton.disabled = true;
+        this.deselectButton.disabled = true;
+        this.hintButton.disabled = true;
+
         if (isWin) {
-            // Celebration vibration
-            if (navigator.vibrate) {
-                navigator.vibrate([100, 50, 100, 50, 100]);
-            }
-            this.showMessage("🎉 Congratulations! You found all connections! 🎉", "alert-success");
+            this.showMessage('Congratulations! You solved the puzzle!', 'alert-success');
         } else {
-            this.showMessage("💔 Game Over! Better luck next time.", "alert-danger");
-            // Don't reveal remaining categories when player loses
+            this.showMessage('You have run out of mistakes. You can retry or start a new game', 'alert-danger');
+            this.retryButton.style.display = 'block'; // Show retry button
         }
     }
 }
