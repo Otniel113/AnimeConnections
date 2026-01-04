@@ -5,9 +5,9 @@ Game Connections terinspirasi dari Connections NYT (New York Times) tapi menggun
 https://animeconnections.netlify.app/
 
 ## Yang Unik
-1. Menggunakan Dark Theme
+1. Memiliki Dark Theme
 2. Berfokus pada topik anime
-3. Bisa main unlimited
+3. Bisa main unlimited ataupun langsung memulai game baru
 
 ## Fitur
 1. Retry, bisa mengulang permainan yang sama berulang kali

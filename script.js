@@ -410,5 +410,50 @@ class AnimeConnectionsGame {
     }
 }
 
-// Initialize the game when the script loads
+// Theme Toggle Functionality
+class ThemeManager {
+    constructor() {
+        this.themeToggle = document.getElementById('theme-toggle');
+        this.htmlElement = document.documentElement;
+        this.themeColorMeta = document.getElementById('theme-color-meta');
+        
+        // Clear any stored preference to ensure light theme default
+        // localStorage.removeItem('anime-connections-theme');
+        
+        // Always start with light theme (ignore system preference and localStorage)
+        this.setTheme('light');
+        
+        this.setupEventListeners();
+    }
+    
+    setupEventListeners() {
+        if (this.themeToggle) {
+            this.themeToggle.addEventListener('click', () => this.toggleTheme());
+        }
+    }
+    
+    toggleTheme() {
+        const currentTheme = this.htmlElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        this.setTheme(newTheme);
+        
+        // Save preference for current session (optional, can be removed if you don't want persistence)
+        localStorage.setItem('anime-connections-theme', newTheme);
+    }
+    
+    setTheme(theme) {
+        this.htmlElement.setAttribute('data-theme', theme);
+        this.htmlElement.setAttribute('data-bs-theme', theme);
+        
+        // Update theme-color meta tag for mobile browsers
+        if (this.themeColorMeta) {
+            this.themeColorMeta.content = theme === 'dark' ? '#1a202c' : '#f0f4f8';
+        }
+    }
+}
+
+// Initialize the game and theme manager when the script loads
 new AnimeConnectionsGame();
+
+// Initialize theme manager immediately
+new ThemeManager();

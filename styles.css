@@ -1,20 +1,63 @@
 /* Anime Connections Game Styles - Mobile Optimized */
 
+/* Light Theme (Default) */
+:root {
+    --bg-primary: #f0f4f8;
+    --bg-secondary: #ffffff;
+    --bg-item: #e2e8f0;
+    --bg-item-hover: #cbd5e0;
+    --bg-item-selected: #4299e1;
+    --text-primary: #1a202c;
+    --text-secondary: #4a5568;
+    --text-item: #2d3748;
+    --text-item-selected: #ffffff;
+    --border-color: #cbd5e0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --footer-text: #6c757d;
+    --footer-link: #3182ce; /* Lighter blue for better visibility in light mode */
+    --mistake-dot: #a0aec0;
+    --mistake-dot-used: #dc3545;
+    --flash-color: #90cdf4;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --bg-primary: #1a202c;
+    --bg-secondary: #2d3748;
+    --bg-item: #4a5568;
+    --bg-item-hover: #5a6678;
+    --bg-item-selected: #4299e1;
+    --text-primary: #e2e8f0;
+    --text-secondary: #a0aec0;
+    --text-item: #f7fafc;
+    --text-item-selected: #ffffff;
+    --border-color: #4a5568;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --footer-text: #a0aec0;
+    --footer-link: #d2b48c;
+    --mistake-dot: #718096;
+    --mistake-dot-used: #dc3545;
+    --flash-color: #63b3ed;
+}
+
 body {
-    background-color: #1a202c; /* Dark Blue */
+    background-color: var(--bg-primary) !important;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    color: #e2e8f0;
+    color: var(--text-primary) !important;
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .game-container {
     max-width: 600px;
     margin: 1rem auto;
     padding: 1rem;
-    background-color: #2d3748; /* Slightly Lighter Dark Blue */
+    background-color: var(--bg-secondary);
     border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Added for absolute positioning of toggle button */
 }
 
 .grid-container {
@@ -26,7 +69,7 @@ body {
 }
 
 .grid-item {
-    background-color: #4a5568; /* Blue-Gray */
+    background-color: var(--bg-item);
     border: none;
     border-radius: 8px;
     padding: 8px;
@@ -40,20 +83,20 @@ body {
     transition: all 0.2s ease-in-out;
     user-select: none;
     font-size: 0.8rem;
-    color: #f7fafc;
+    color: var(--text-item);
     line-height: 1.2;
     word-wrap: break-word;
     hyphens: auto;
 }
 
 .grid-item:hover {
-    background-color: #5a6678;
+    background-color: var(--bg-item-hover);
     transform: scale(1.02);
 }
 
 .grid-item.selected {
-    background-color: #4299e1; /* Brighter Blue */
-    color: #ffffff;
+    background-color: var(--bg-item-selected);
+    color: var(--text-item-selected);
     transform: scale(1.05);
 }
 
@@ -62,8 +105,8 @@ body {
 }
 
 @keyframes flash {
-    0%, 100% { background-color: #4a5568; }
-    50% { background-color: #63b3ed; } /* Light blue flash */
+    0%, 100% { background-color: var(--bg-item); }
+    50% { background-color: var(--flash-color); }
 }
 
 .solved-row {
@@ -94,17 +137,17 @@ body {
 .mistake-dot {
     width: 18px;
     height: 18px;
-    background-color: #718096; /* Blue-Gray */
+    background-color: var(--mistake-dot);
     border-radius: 50%;
     transition: background-color 0.3s ease;
 }
 
 .mistake-dot.used {
-    background-color: #dc3545; /* Red for mistake */
+    background-color: var(--mistake-dot-used);
 }
 
 .game-title {
-    color: #ffffff;
+    color: var(--text-primary);
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
 }
@@ -152,13 +195,15 @@ body {
 /* Footer Styling */
 footer {
     font-size: 0.85rem;
-    color: #6c757d;
+    color: var(--footer-text);
+    transition: color 0.3s ease;
 }
 
 footer a {
-    color: #8b6914;
+    color: var(--footer-link);
     text-decoration: none;
     font-weight: 500;
+    transition: color 0.3s ease;
 }
 
 footer a:hover {
@@ -169,14 +214,47 @@ footer p {
     margin-bottom: 0.25rem;
 }
 
-@media (prefers-color-scheme: dark) {
-    footer {
-        color: #a0aec0;
-    }
-    
-    footer a {
-        color: #d2b48c;
-    }
+/* Theme Toggle Button */
+.theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+    background-color: var(--bg-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-icon {
+    display: none;
+}
+
+/* Show moon icon in light mode (clicking will switch to dark) */
+[data-theme="light"] .light-icon {
+    display: block;
+}
+
+/* Show sun icon in dark mode (clicking will switch to light) */
+[data-theme="dark"] .dark-icon {
+    display: block;
 }
 
 /* Mobile Optimizations */
@@ -296,19 +374,13 @@ footer p {
     }
 }
 
-/* Dark mode adjustments for better contrast */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #0d1117;
-    }
-    
-    .game-container {
-        background-color: #21262d;
-        border: 1px solid #30363d;
-    }
-    
-    .grid-item {
-        background-color: #30363d;
-        border: 1px solid #21262d;
+/* Theme toggle mobile adjustments */
+@media (max-width: 576px) {
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+        top: 0.8rem;
+        right: 0.8rem;
     }
 }
