@@ -8,7 +8,7 @@
     {"category": "Red Haired Characters", "answers": ["Soma", "Shanks", "Karma", "Nagato"]},
     {"category": "Demographic Genre", "answers": ["Shounen", "Shoujo", "Seinen", "Josei"]},
     {"category": "University Student Anime", "answers": ["Golden Time", "Grand Blue", "Rikekoi", "Steins;Gate"]},
-    {"category": "Work Environment Anime", "answers": ["Shirobako", "Koori Zokusei", "Wotakoi", "Senpai ga Uzai"]},
+    {"category": "Work Environment Anime", "answers": ["Servant x Service", "Koori Zokusei", "Wotakoi", "Senpai ga Uzai"]},
     {"category": "Cafe Theme Anime", "answers": ["Blend S", "Gochiusa", "Working!", "Megami no Kafe"]},
     {"category": "Mecha Anime", "answers": ["Code Geass", "Evangelion", "Gurren Lagann", "Darling in the FranXX"]},
     {"category": "Anime adapted from Novel", "answers": ["Subete ga F", "Hyouka", "Another", "Eat Pancreas"]},
@@ -87,7 +87,7 @@
     {"category": "Donghua (Chinese Anime)", "answers": ["To Be Hero X", "Lord of Mysteries", "Heaven Official's Blessing", "Scissor Seven"]},
     {"category": "Anime Adapted from Manhwa (Korean Manga)", "answers": ["Solo Leveling", "Tower of God", "The God of Highschool", "Noblesse"]},
     {"category": "Anime Related to Sea", "answers": ["One Piece", "Nagi no Asukara", "ARIA Series", "Aquatope White Sand"]},
-    {"category": "Tsundere Characters", "answers": ["Taiga", "Tohsaka Rin", "Asuka", "Louise Françoise"]},
+    {"category": "Tsundere Characters", "answers": ["Taiga", "Tohsaka Rin", "Shana", "Louise Françoise"]},
     {"category": "Magic Girl Anime", "answers": ["Madoka Magica", "Cardcaptor Sakura", "Sailor Moon", "Pretty Cure"]},
     {"category": "Dragon Ball Characters", "answers": ["Goku", "Gohan", "Frieza", "Piccolo"]},
     {"category": "Hetalia Characters or Country Name", "answers": ["Russia", "Germany", "France", "Italy"]},
@@ -169,5 +169,10 @@
     {"category": "Heterochromia Characters", "answers": ["Nakatsu Shizuru", "Tokisaki Kurumi", "Akashi Seijuro", "Elizabeth Liones"]},
     {"category": "2 Hair Color Characters", "answers": ["Haise Sasaki", "Yami Yugi", "Hasegawa Kodaka", "Uta"]},
     {"category": "Loud Yelling Characters", "answers": ["Bakugo", "Nishinoya", "Squalo", "Kamina"]},
-    {"category": "All That Glitters is not Gold (Good Graphics, Bad or Mid Story)", "answers": ["Musaigen no Phantom World", "Koutetsujou no Kabaneri", "Guilty Crown", "Glasslip"]}
+    {"category": "All That Glitters is not Gold (Good Graphics, Bad or Mid Story)", "answers": ["Musaigen no Phantom World", "Koutetsujou no Kabaneri", "Guilty Crown", "Glasslip"]},
+    {"category": "Same Gender Romance Genre", "answers": ["Shoujo-Ai", "Shounen-Ai", "Yuri", "Yaoi"]},
+    {"category": "Like Teasing", "answers": ["Takagi", "Kubo", "Nagatoro", "Fuyuki"]},
+    {"category": "Bokkuko (Female Use 'Boku' for I)", "answers": ["Zero Two", "Hestia", "Tsukimiya Ayu", "Sera Masumi"]},
+    {"category": "Smart Female Characters", "answers": ["Nico Robin", "Makise Kurisu", "Shiro", "Bulma"]},
+    {"category": "Act as a Manager", "answers": ["Amagi Brilliant Park", "Sakura Quest", "Paripi Komei", "Realist Hero"]}
 ]
