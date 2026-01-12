@@ -61,7 +61,7 @@ class AnimeConnectionsGame {
 
     async loadGameData() {
         try {
-            const response = await fetch('./gameData.json');
+            const response = await fetch('./data/gameData.json');
             this.allData = await response.json();
         } catch (error) {
             console.error('Error loading game data:', error);
